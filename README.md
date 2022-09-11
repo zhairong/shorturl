@@ -19,4 +19,16 @@ design thinking
 ### to considering
 * how many entries should be considered.
 * limit of amount generated shorturl, and solution.
-* 
+
+### Version 1
+* save map ins cache, no database.
+* resolve longurl from cache, no database.
+* build shorturl generator, build shorturl redirect
+* build read API, resolve API.
+
+### Prototyp 
+* add map short to long
+* read shorturl and return longurl
+* redirect shorturl to longurl if exists otherwise to default url.
+
+# 
