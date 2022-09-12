@@ -1,3 +1,5 @@
+package info.zhairong.shorturl;
+
 import java.util.regex.Pattern;
 
 public class UrlUtils {

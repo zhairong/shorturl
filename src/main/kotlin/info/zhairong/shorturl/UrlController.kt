@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import org.springframework.web.servlet.view.RedirectView
 
-
 @RestController
 @RequestMapping("/api")
 class UrlController(private val urlCache: UrlCache, private val generator: ShortUrlGenerator) {
