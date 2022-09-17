@@ -5,6 +5,7 @@ design thinking
 * the mapping shorturl to orignal url should be invalidated after a timespan if the shorturl not used.
 * URL redirection should happen in real-time with minimal latency.
 * shorturl should be random generated, not guessable.
+* short as possible so that more longurl can be mapped.
 * to find out:  memories, storage for how many usages.
 ### API
 * reading map shorturl to longurl
@@ -31,4 +32,9 @@ design thinking
 * read shorturl and return longurl
 * redirect shorturl to longurl if exists otherwise to default url.
 
-# 
+### more considing
+* configure easy limitation of requesting, for avoiding DDoS attacking.
+* save short=>long in in-memory-db, cached by LRUMap.
+* TODO: 
+** if the longUrl already exists a shortUrl in System, just return the shortUrl, don't generate it again.
+**  

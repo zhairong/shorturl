@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 class HtmlController {
     @GetMapping("/")
     fun blog(model: Model): String {
-        model["title"] = "Blog"
+        model["title"] = "default page"
         return "blog"
     }
 }
