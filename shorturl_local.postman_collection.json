@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "03c3e8ed-41d5-47e1-83bc-6edaadc16b64",
+		"name": "shorturl_local",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1833412"
+	},
+	"item": [
+		{
+			"name": "getShortUrl",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/get/3kQ54t",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"get",
+						"3kQ54t"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "generateShort",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/generate?longUrl=http://www.berlin.de",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"generate"
+					],
+					"query": [
+						{
+							"key": "longUrl",
+							"value": "http://www.berlin.de"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test_redirect_by_using_short_url",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/rd/3kQ54t",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rd",
+						"3kQ54t"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

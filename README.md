@@ -1,43 +1,49 @@
-design thinking
-###
+### URL Shortener
+![header](api.png)
+###  Think about
 * this application will generate a shorter and unique alias for a given url (for url provider).
 * user(end user) access our application with shorturl will be redirected to the original url.
-* the mapping shorturl to orignal url should be invalidated after a timespan if the shorturl not used.
 * URL redirection should happen in real-time with minimal latency.
 * shorturl should be random generated, not guessable.
 * short as possible so that more longurl can be mapped.
 * to find out:  memories, storage for how many usages.
 ### API
-* reading map shorturl to longurl
-* writing add mapping (shorturl=>longurl)
-
+* /get/{shortUrl}
+  * get original url by using short url 
+  * request: http://localhost:8080/get/3kQ54t
+  * response: ``` { "code":200, "msg":"success", "data":"https://www.tu.berlin/" }```
+* /generate
+  * get shortUrl by giving original url.
+  * request: http://localhost:8080/generate?url=https://www.tu.berlin
+  * response: ``` { "code":200, "msg":"success", "data":"3kQ54t" }```
+* /rd/{shortUrl}
+  * redirect a shorturl to original url. [HTTP 302](https://en.wikipedia.org/wiki/HTTP_302).
+  * request: http://localhost:8080/rd/3kQ54t
+  * and url will be redirected to https://www.tu.berlin
+* /swagger-ui
+  * API definition
+  * you can test local service by using this utility.
 ### Impl
-* strategy for generating shorturl with longurl.
+* short url will be generated with [MurmurHash](https://en.wikipedia.org/wiki/MurmurHash).
+* keyword: [base62, MurmurHash] shortUrl contains 6 chars. 
+* using Map as in Memory DB, we can use NoSQL (mongoDB, Cassandra) save shorturl mapping.
+* no neccessary to use RDBMS, key-value for short=>long, nosql is perfect solution for prod.
+* LRUMap as Cache solution. 
 
-### Usage
-* forward request with shorturl to longurl. (http 30x)
+### Security
+* Security is a big thing to think about. I have only implemented an interceptor to avoid DDoS attacking.
+* only one shorturl will be generated for one IP within 5 seconds. 
 
-### to considering
-* how many entries should be considered.
-* limit of amount generated shorturl, and solution.
+### Test
+* develop test with WebMvcTest, test only business logic UrlController, urlservice will be mocked.
+* integration-test with SpringBootTest.
+* test with [postman](https://www.postman.com/)
+* postman test collection: shorturl_local.postman_collection.json.
+ 
+### requirement
+* JDK 8+
+* Kotlin 2.7.3
+* Gradle
 
-### Version 1
-* save map ins cache, no database.
-* resolve longurl from cache, no database.
-* build shorturl generator, build shorturl redirect
-* build read API, resolve API.
-
-### Prototyp 
-* add map short to long
-* read shorturl and return longurl
-* redirect shorturl to longurl if exists otherwise to default url.
-
-### more considing
-* configure easy limitation of requesting, for avoiding DDoS attacking.
-* save short=>long in in-memory-db, cached by LRUMap.
-* TODO: 
-** if the longUrl already exists a shortUrl in System, just return the shortUrl, don't generate it again.
-**  
 ### start application
-
-### test application
+* gradlew bootrun
