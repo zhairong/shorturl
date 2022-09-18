@@ -38,3 +38,6 @@ design thinking
 * TODO: 
 ** if the longUrl already exists a shortUrl in System, just return the shortUrl, don't generate it again.
 **  
+### start application
+
+### test application

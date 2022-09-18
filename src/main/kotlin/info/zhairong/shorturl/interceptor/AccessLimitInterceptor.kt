@@ -26,13 +26,13 @@ class AccessLimitInterceptor : HandlerInterceptor {
     @Throws(Exception::class)
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
         if (handler is HandlerMethod) {
-            val accessLimit = handler.getMethodAnnotation(AccessLimit::class.java) ?: return true
+            val accessLimit = handler.getMethodAnnotation(AccessLimit::class.java) ?: return  true
             val maxCount: Int = accessLimit.maxCount
             val ip = getIpAddress(request)
             val method = request.method
             val requestURI = request.requestURI
             val ipAddr = "$ip:$method:$requestURI"
-            var countIpAccess = cache!!.get(ipAddr)
+            val countIpAccess = cache!!.get(ipAddr)
             if (countIpAccess == null) {
                 cache!!.put(ipAddr, 1)
             } else {

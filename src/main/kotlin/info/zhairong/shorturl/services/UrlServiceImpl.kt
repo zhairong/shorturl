@@ -1,6 +1,5 @@
 package info.zhairong.shorturl.services
 
-import cn.hutool.bloomfilter.BloomFilterUtil
 import info.zhairong.shorturl.data.UrlMap
 import info.zhairong.shorturl.utilities.HashUtils.hashToBase62
 import org.springframework.stereotype.Service
@@ -28,37 +27,30 @@ class UrlServiceImpl(private val urlMapper:UrlMapper, private val urlCache: UrlC
         return longUrl
     }
 
-    override fun saveUrlMap(shortURL: String, longURL: String, originalURL: String): String {
+    override fun saveUrlMap(shortUrl: String, longUrl: String, originalUrl: String): String {
         //保留长度为1的短链接
-        var shortURL = shortURL
-        var longURL = longURL
+        var shortURL = shortUrl
+        var longURL = longUrl
         if (shortURL.length == 1) {
             longURL += DUPLICATE
-            shortURL = saveUrlMap(hashToBase62(longURL), longURL, originalURL)
+            shortURL = saveUrlMap(hashToBase62(longURL), longURL, originalUrl)
         } else if (urlCache.contains(shortURL) && urlCache[shortURL]!=null) {
             val cachedLongURL = urlCache[shortURL]
             // longUrl is already inserted and just return the shortUrl.
-            if (originalURL == cachedLongURL) {
+            if (originalUrl == cachedLongURL) {
                 return shortURL
             }
             longURL += DUPLICATE
-            shortURL = saveUrlMap(hashToBase62(longURL), longURL, originalURL)
+            shortURL = saveUrlMap(hashToBase62(longURL), longURL, originalUrl)
         } else {
             // not exists, put it to database.
-            urlMapper.saveUrlMap(UrlMap(shortURL, originalURL))
-            urlCache.put(shortURL, originalURL);
+            urlMapper.saveUrlMap(UrlMap(shortURL, originalUrl))
+            urlCache.put(shortURL, originalUrl)
         }
         return shortURL
     }
 
     companion object {
-        //自定义长链接防重复字符串
         private const val DUPLICATE = "*"
-
-        //最近使用的短链接缓存过期时间(分钟)
-        private const val TIMEOUT: Long = 10
-
-        //创建布隆过滤器
-        private val FILTER = BloomFilterUtil.createBitMap(10)
     }
 }

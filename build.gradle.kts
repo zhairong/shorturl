@@ -5,7 +5,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.0.13.RELEASE"
 	kotlin("jvm") version "1.6.21"
 	kotlin("plugin.spring") version "1.6.21"
-	kotlin("plugin.jpa") version "1.6.21"
+	//kotlin("plugin.jpa") version "1.6.21"
 	application
 }
 
@@ -30,16 +30,22 @@ dependencies {
 	implementation("io.springfox:springfox-swagger2:3.0.0")
 	implementation("io.springfox:springfox-boot-starter:3.0.0")
 	implementation("io.springfox:springfox-swagger-ui:3.0.0")
-	implementation("ch.qos.logback:logback-classic:1.2.6")
-	implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
+	//implementation("ch.qos.logback:logback-classic:1.4.0")
+	implementation("io.github.microutils:kotlin-logging-jvm:2.1.23")
 	implementation("cn.hutool:hutool-all:5.8.6")
 	implementation("commons-validator:commons-validator:1.7")
-	//implementation("org.slf4j:slf4j-simple:1.7.28")
-	//implementation("org.slf4j:slf4j-api:2.0.0")
+	implementation("org.slf4j:slf4j-simple:2.0.0")
+	implementation("org.slf4j:slf4j-api:2.0.0")
 
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.boot:spring-boot-starter-test"){
+		exclude(module = "junit")
+		exclude(module = "mockito-core")
+	}
+	testImplementation("org.junit.jupiter:junit-jupiter-api")
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+	testImplementation("com.ninja-squad:springmockk:3.1.1")
 }
 
 tasks.withType<KotlinCompile> {
