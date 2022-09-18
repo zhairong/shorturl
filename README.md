@@ -32,7 +32,11 @@
 
 ### Security
 * Security is a big thing to think about. I have only implemented an interceptor to avoid DDoS attacking.
-* only one shorturl will be generated for one IP within 5 seconds. 
+* only one shorturl will be generated for one IP within 5 seconds.
+
+### scalability
+* This app is not scalable for now, because I used In Memory DB and Cache,it is only for local usage.
+* next step is use radis to replace in memory DB and Cache. 
 
 ### Test
 * develop test with WebMvcTest, test only business logic UrlController, urlservice will be mocked.
