@@ -48,7 +48,7 @@
 ### start single application on host
 * gradlew bootrun
 
-### build Docker image and start app in Container, scaled with tcp port.
+### build Docker image and start app in Container
 sudo docker build -t zhairong/shorturl .
 sudo docker run -p 8080:8080 springio/shorturl
 sudo docker run -p 8081:8080 springio/shorturl
@@ -57,3 +57,4 @@ sudo docker run -p 8082:8080 springio/shorturl
 ### TODO
 * This app is not scalable for now, because I used In Memory DB and Cache,it is only for local usage.
 * next step is use radis to replace in memory DB and Cache.
+* scaling Services per docker-compose
