@@ -49,11 +49,11 @@
 * gradlew bootrun
 
 ### build Docker image and start app in Container
-./gradlew build
-sudo docker build -t zhairong/shorturl .
-sudo docker run -p 8080:8080 zhairong/shorturl
-sudo docker run -p 8081:8080 zhairong/shorturl
-sudo docker run -p 8082:8080 zhairong/shorturl
+* ./gradlew build
+* sudo docker build -t zhairong/shorturl .
+* sudo docker run -p 8080:8080 zhairong/shorturl
+* sudo docker run -p 8081:8080 zhairong/shorturl
+* sudo docker run -p 8082:8080 zhairong/shorturl
 
 ### TODO
 * This app is not scalable for now, because I used In Memory DB and Cache,it is only for local usage.
