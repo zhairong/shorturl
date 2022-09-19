@@ -37,12 +37,14 @@ dependencies {
 	implementation("org.slf4j:slf4j-simple:2.0.0")
 	implementation("org.slf4j:slf4j-api:2.0.0")
 
+
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test"){
 		exclude(module = "junit")
 		exclude(module = "mockito-core")
 	}
+	testImplementation("org.apache.httpcomponents:httpclient:4.5.13")
 	testImplementation("org.junit.jupiter:junit-jupiter-api")
 	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 	testImplementation("com.ninja-squad:springmockk:3.1.1")

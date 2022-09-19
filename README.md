@@ -34,10 +34,6 @@
 * Security is a big thing to think about. I have only implemented an interceptor to avoid DDoS attacking.
 * only one shorturl will be generated for one IP within 5 seconds.
 
-### scalability
-* This app is not scalable for now, because I used In Memory DB and Cache,it is only for local usage.
-* next step is use radis to replace in memory DB and Cache. 
-
 ### Test
 * develop test with WebMvcTest, test only business logic UrlController, urlservice will be mocked.
 * integration-test with SpringBootTest.
@@ -49,5 +45,15 @@
 * Kotlin 2.7.3
 * Gradle
 
-### start application
+### start single application on host
 * gradlew bootrun
+
+### build Docker image and start app in Container, scaled with tcp port.
+sudo docker build -t zhairong/shorturl .
+sudo docker run -p 8080:8080 springio/shorturl
+sudo docker run -p 8081:8080 springio/shorturl
+sudo docker run -p 8082:8080 springio/shorturl
+
+### TODO
+* This app is not scalable for now, because I used In Memory DB and Cache,it is only for local usage.
+* next step is use radis to replace in memory DB and Cache.

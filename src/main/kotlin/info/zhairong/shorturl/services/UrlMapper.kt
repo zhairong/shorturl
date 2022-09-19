@@ -1,8 +1,6 @@
 package info.zhairong.shorturl.services
 
 import info.zhairong.shorturl.data.UrlMap
-import org.springframework.context.annotation.Bean
-import org.springframework.stereotype.Repository
 import org.springframework.stereotype.Service
 
 /**
